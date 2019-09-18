@@ -24,4 +24,19 @@ class PeliculasProvider
     return pelicula.items;
 
   }
+
+  Future<List<Pelicula>> getPopulares() async
+  {
+    final url = Uri.https(_url, '3/movie/popular',{
+      'api_key' : _apiKey,
+      'language': _lenguage
+    });
+
+    final respuesta = await http.get(url);
+    final decodedData = json.decode(respuesta.body);
+    
+    final pelicula = new Peliculas.fromJsonList(decodedData['results']);
+    
+    return pelicula.items;
+  }
 }
