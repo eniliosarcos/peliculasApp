@@ -7,7 +7,7 @@ class Peliculas
 
   Peliculas();
 
-  Peliculas.jsonFromList(List<dynamic> jsonList)
+  Peliculas.fromJsonList(List<dynamic> jsonList)
   {
 
     if(jsonList == null) 
@@ -60,7 +60,7 @@ class Pelicula
   Pelicula.fromJsonMap( Map<String, dynamic> json) 
   {
 
-  popularity = json['popularity'];
+  popularity = json['popularity'] / 1;
   voteCount = json['vote_count'];
   video = json['video'];
   posterPath = json['poster_path'];
@@ -71,9 +71,20 @@ class Pelicula
   originalTitle = json['original_title'];
   genreIds = json['genre_ids'].cast<int>();
   title = json['title'];
-  voteAverage = json['vote_average']/1;
+  voteAverage = json['vote_average'] / 1;
   overview = json['overview'];
   releaseDate = json['release_date'];
 
+  }
+
+  getPosterImg(){
+    if(posterPath == null)
+    {
+      return 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
+    }
+    else
+    {
+      return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
   }
 }

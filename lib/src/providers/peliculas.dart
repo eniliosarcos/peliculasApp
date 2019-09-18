@@ -12,14 +12,14 @@ class PeliculasProvider
   Future<List<Pelicula>> getInCines() async
   {
     final url = Uri.https(_url, '3/movie/now_playing',{
-      'apiKey' : _apiKey,
+      'api_key' : _apiKey,
       'language': _lenguage
     });
 
     final respuesta = await http.get(url);
     final decodedData = json.decode(respuesta.body);
-
-    final pelicula = new Peliculas.jsonFromList(decodedData['results']);
+    
+    final pelicula = new Peliculas.fromJsonList(decodedData['results']);
 
     return pelicula.items;
 
